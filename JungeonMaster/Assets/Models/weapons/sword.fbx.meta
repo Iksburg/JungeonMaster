@@ -1,26 +1,8 @@
 fileFormatVersion: 2
-guid: fad5d87960c57584bbb3e68d6abcbf44
+guid: e42fe290d3613c7488304ebf838b160a
 ModelImporter:
   serializedVersion: 21300
-  internalIDToNameTable:
-  - first:
-      74: -4619980994992770554
-    second: maleArmature|idle
-  - first:
-      74: 560808226215005507
-    second: maleArmature|idle.001
-  - first:
-      74: -144013728474711968
-    second: maleArmature|idle.003
-  - first:
-      74: -6596344648035463768
-    second: maleArmature|idle.004
-  - first:
-      74: 6390621014955418067
-    second: maleArmature|walk
-  - first:
-      74: -203655887218126122
-    second: mixamo.com
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 2
