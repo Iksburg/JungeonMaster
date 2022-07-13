@@ -10,14 +10,13 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
-    private bool _readyToJump = true;
+    private bool _readyToJump;
 
     [Header("KeyBinds")] 
     public KeyCode jumpKey = KeyCode.Space;
     
     [Header("Ground Check")] 
     public float playerHeight;
-
     public LayerMask whatIsGround;
     private bool _grounded;
     
@@ -30,12 +29,42 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody _rb;
 
+    private void Start()
+    {
+        _rb = GetComponent<Rigidbody>();
+        _rb.freezeRotation = true;
+
+        _readyToJump = true;
+    }
+
+    private void Update()
+    {
+        //ground check
+        _grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        
+        MyInput();
+        SpeedControl();
+        
+        //handle drag
+        if (_grounded)
+            _rb.drag = groundDrag;
+        else
+        {
+            _rb.drag = 0;
+        }
+    }
+    
+    private void FixedUpdate()
+    {
+        MovePlayer();
+    }
+    
     private void MyInput()
     {
         _horizontalInput = Input.GetAxisRaw("Horizontal");
         _verticalInput = Input.GetAxisRaw("Vertical");
         
-        //when jump
+        // when jump
         if (Input.GetKey(jumpKey) && _readyToJump && _grounded)
         {
             _readyToJump = false;
@@ -48,7 +77,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        //calculate movement direction (!!!Don't work!!!)
         _moveDirection = orientation.forward * _verticalInput + orientation.right * _horizontalInput;
 
         switch (_grounded)
@@ -57,16 +85,12 @@ public class PlayerMovement : MonoBehaviour
             case true:
                 _rb.AddForce(_moveDirection.normalized * (moveSpeed * 10f), ForceMode.Force);
                 break;
+            
             // in air
             case false:
                 _rb.AddForce(_moveDirection.normalized * (moveSpeed * 10f * airMultiplier), ForceMode.Force);
                 break;
         }
-    }
-
-    private void FixedUpdate()
-    {
-        MovePlayer();
     }
 
     private void SpeedControl()
@@ -92,28 +116,5 @@ public class PlayerMovement : MonoBehaviour
     private void ResetJump()
     {
         _readyToJump = true;
-    }
-
-    void Start()
-    {
-        _rb = GetComponent<Rigidbody>();
-        _rb.freezeRotation = true;
-    }
-
-    void Update()
-    {
-        //ground check
-        _grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-        
-        MyInput();
-        SpeedControl();
-        
-        //handle drag
-        if (_grounded)
-            _rb.drag = groundDrag;
-        else
-        {
-            _rb.drag = 0;
-        }
     }
 }
