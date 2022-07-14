@@ -1,12 +1,22 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")] 
-    public float moveSpeed;
+    private float _moveSpeed;
 
+    public float walkSpeed;
+    public float sprintSpeed;
+    
     public float groundDrag;
-
+    
+    [Header("Crouching")]
+    public float crouchSpeed;
+    public float crouchYScale;
+    private float _startYScale;
+    
+    [Header("Jumping")]
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
@@ -14,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("KeyBinds")] 
     public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode sprintKey = KeyCode.LeftShift;
+    public KeyCode crouchKey = KeyCode.LeftControl;
     
     [Header("Ground Check")] 
     public float playerHeight;
@@ -29,12 +41,23 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody _rb;
 
+    public MovementState state;
+    public enum MovementState
+    {
+        Crouching,
+        Walking,
+        Sprinting,
+        Air
+    }
+    
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _rb.freezeRotation = true;
 
         _readyToJump = true;
+
+        _startYScale = transform.localScale.y;
     }
 
     private void Update()
@@ -44,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
         
         MyInput();
         SpeedControl();
+        StateHandler();
         
         //handle drag
         if (_grounded)
@@ -73,22 +97,66 @@ public class PlayerMovement : MonoBehaviour
             
             Invoke(nameof(ResetJump), jumpCooldown);
         }
+        
+        // when crouch
+        if (Input.GetKeyDown(crouchKey))
+        {
+            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
+            _rb.AddForce(Vector3.down * 5, ForceMode.Impulse);
+        }
+        
+        // when stop crouching
+        if (Input.GetKeyUp(crouchKey))
+        {
+            transform.localScale = new Vector3(transform.localScale.x, _startYScale, transform.localScale.z);
+        }
     }
 
+    private void StateHandler()
+    {
+        // Crouching
+        if (Input.GetKey(crouchKey))
+        {
+            state = MovementState.Crouching;
+            _moveSpeed = crouchSpeed;
+        }
+        
+        switch (_grounded)
+        {
+            // Sprinting
+            case true when Input.GetKey(sprintKey):
+                state = MovementState.Sprinting;
+                _moveSpeed = sprintSpeed;
+                break;
+            
+            // Walking
+            case true:
+                state = MovementState.Walking;
+                _moveSpeed = walkSpeed;
+                break;
+            
+            // In air
+            default:
+                state = MovementState.Air;
+                break;
+        }
+    }
+    
     private void MovePlayer()
     {
+        // calculate movement direction
         _moveDirection = orientation.forward * _verticalInput + orientation.right * _horizontalInput;
 
         switch (_grounded)
         {
             //on ground
             case true:
-                _rb.AddForce(_moveDirection.normalized * (moveSpeed * 10f), ForceMode.Force);
+                _rb.AddForce(_moveDirection.normalized * (_moveSpeed * 10f), ForceMode.Force);
                 break;
             
             // in air
             case false:
-                _rb.AddForce(_moveDirection.normalized * (moveSpeed * 10f * airMultiplier), ForceMode.Force);
+                _rb.AddForce(_moveDirection.normalized * (_moveSpeed * 10f * airMultiplier), ForceMode.Force);
                 break;
         }
     }
@@ -98,9 +166,9 @@ public class PlayerMovement : MonoBehaviour
         Vector3 flatVel = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
         
         //limit velocity if it needed
-        if (flatVel.magnitude > moveSpeed)
+        if (flatVel.magnitude > _moveSpeed)
         {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            Vector3 limitedVel = flatVel.normalized * _moveSpeed;
             _rb.velocity = new Vector3(limitedVel.x, _rb.velocity.y, limitedVel.z);
         }
     }
