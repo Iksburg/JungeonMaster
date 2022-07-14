@@ -120,21 +120,18 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.Crouching;
             _moveSpeed = crouchSpeed;
         }
-        
-        switch (_grounded)
+        else switch (_grounded)
         {
             // Sprinting
             case true when Input.GetKey(sprintKey):
                 state = MovementState.Sprinting;
                 _moveSpeed = sprintSpeed;
                 break;
-            
             // Walking
             case true:
                 state = MovementState.Walking;
                 _moveSpeed = walkSpeed;
                 break;
-            
             // In air
             default:
                 state = MovementState.Air;
