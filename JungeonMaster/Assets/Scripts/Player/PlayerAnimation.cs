@@ -1,28 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimation : MonoBehaviour
+namespace Player
 {
-    public Transform orientation;
-    
-    public GameObject player;
-    private PlayerCamera _camera;
-    
-    private float _yRotation;
-    private float _sensX;
-    void Start()
+    public class PlayerAnimation : MonoBehaviour
     {
-        _camera = player.GetComponent<PlayerCamera>();
-        _sensX = _camera.sensX;
-    }
+        public GameObject player;
+        private PlayerCamera _camera;
     
-    void Update()
-    {
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * _sensX;
+        private float _yRotation;
+        private float _sensX;
+        private float _xRotation;
+        void Start()
+        {
+            _camera = player.GetComponent<PlayerCamera>();
+            _sensX = _camera.sensX;
+        }
+    
+        void Update()
+        {
+            float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * _sensX;
+            _yRotation += mouseX;
 
-        _yRotation = mouseX;
-        Vector3 rotation = new Vector3(0, _yRotation, 0);
-        transform.Rotate(rotation);
+            transform.rotation = Quaternion.Euler(0, _yRotation, 0);
+        }
     }
 }
