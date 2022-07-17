@@ -10,10 +10,17 @@ namespace Player
         private float _yRotation;
         private float _sensX;
         private float _xRotation;
+        private float _speed;
+        private Rigidbody _rb;
+        private Animator _animator;
+        private static readonly int Speed = Animator.StringToHash("Speed");
+
         void Start()
         {
             _camera = player.GetComponent<PlayerCamera>();
             _sensX = _camera.sensX;
+            _rb = GetComponent<Rigidbody>();
+            _animator = GetComponent<Animator>();
         }
     
         void Update()
@@ -22,6 +29,9 @@ namespace Player
             _yRotation += mouseX;
 
             transform.rotation = Quaternion.Euler(0, _yRotation, 0);
+            
+            _speed = _rb.velocity.magnitude;
+            _animator.SetFloat(Speed, _speed);
         }
     }
 }

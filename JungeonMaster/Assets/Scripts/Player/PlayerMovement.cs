@@ -171,8 +171,12 @@ namespace Player
             else {
                 _rb.AddForce(_moveDirection.normalized * (_moveSpeed * 10f * airMultiplier), ForceMode.Force);
             }
-        
-            _rb.useGravity = !OnSlope();
+            
+            // use gravity in jump
+            if (Input.GetKey(jumpKey))
+                _rb.useGravity = true;
+            else
+                _rb.useGravity = !OnSlope();
         }
 
         private void SpeedControl()
@@ -184,12 +188,12 @@ namespace Player
                     _rb.velocity = _rb.velocity.normalized * _moveSpeed;
             }
         
-            //limiting soeed on ground or in air
+            // limiting speed on ground or in air
             else
             {
                 Vector3 flatVel = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
         
-                //limit velocity if it needed
+                // limit velocity if it needed
                 if (flatVel.magnitude > _moveSpeed)
                 {
                     Vector3 limitedVel = flatVel.normalized * _moveSpeed;
