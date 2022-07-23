@@ -1,24 +1,33 @@
+using System;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerAnimation : MonoBehaviour
     {
+        [Header("PlayerCamera")]
         public GameObject player;
-        private PlayerCamera _camera;
-    
+        private PlayerCamera _playerCamera;
+        
+        [Header("Rotation")]
         private float _yRotation;
         private float _sensX;
         private float _xRotation;
         private float _speed;
+        
+        [Header("Animator")]
         private Rigidbody _rb;
         private Animator _animator;
         private static readonly int Speed = Animator.StringToHash("Speed");
 
+        private void Awake()
+        {
+            _playerCamera = player.GetComponent<PlayerCamera>();
+        }
+
         void Start()
         {
-            _camera = player.GetComponent<PlayerCamera>();
-            _sensX = _camera.sensX;
+            _sensX = _playerCamera.sensX;
             _rb = GetComponent<Rigidbody>();
             _animator = GetComponent<Animator>();
         }

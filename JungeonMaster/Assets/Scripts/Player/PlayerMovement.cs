@@ -6,11 +6,10 @@ namespace Player
     {
         [Header("Movement")] 
         private float _moveSpeed;
-
         public float walkSpeed;
         public float sprintSpeed;
-    
         public float groundDrag;
+        private Vector3 _moveDirection;
     
         [Header("Crouching")]
         public float crouchSpeed;
@@ -32,23 +31,24 @@ namespace Player
         public float playerHeight;
         public LayerMask whatIsGround;
         private Vector3 _correctedVector;
-        private bool _grounded;
+        public bool grounded;
 
         [Header("Slope Handling")] 
         public float maxSlopeAngle;
         private RaycastHit _slopeHit;
         private bool _exitingSlope;
-    
+        
+        [Header("Orientation")]
         public Transform orientation;
-
+        
+        [Header("State")]
+        public MovementState state;
+        
         private float _horizontalInput;
         private float _verticalInput;
 
-        private Vector3 _moveDirection;
-
         private Rigidbody _rb;
-
-        public MovementState state;
+        
         public enum MovementState
         {
             Crouching,
@@ -71,14 +71,14 @@ namespace Player
         {
             //ground check
             _correctedVector = transform.position + new Vector3(0, 0.01f, 0);
-            _grounded = Physics.Raycast(_correctedVector, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+            grounded = Physics.Raycast(_correctedVector, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
         
             MyInput();
             SpeedControl();
             StateHandler();
         
             //handle drag
-            if (_grounded)
+            if (grounded)
                 _rb.drag = groundDrag;
             else
             {
@@ -98,7 +98,7 @@ namespace Player
             _verticalInput = Input.GetAxisRaw("Vertical");
         
             // when jump
-            if (Input.GetKey(jumpKey) && _readyToJump && _grounded)
+            if (Input.GetKey(jumpKey) && _readyToJump && grounded)
             {
                 _readyToJump = false;
             
@@ -129,7 +129,7 @@ namespace Player
                 state = MovementState.Crouching;
                 _moveSpeed = crouchSpeed;
             }
-            else switch (_grounded)
+            else switch (grounded)
             {
                 // Sprinting
                 case true when Input.GetKey(sprintKey):
@@ -162,7 +162,7 @@ namespace Player
             }
         
             //on ground
-            else if (_grounded)
+            else if (grounded)
             {
                 _rb.AddForce(_moveDirection.normalized * (_moveSpeed * 10f), ForceMode.Force);
             }
