@@ -435,6 +435,30 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7123509521970751421, guid: f7f785a0ac58a4e479aaf1a3155ef11c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7123509521970751421, guid: f7f785a0ac58a4e479aaf1a3155ef11c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7123509521970751421, guid: f7f785a0ac58a4e479aaf1a3155ef11c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7123509521970751421, guid: f7f785a0ac58a4e479aaf1a3155ef11c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7123509521970751421, guid: f7f785a0ac58a4e479aaf1a3155ef11c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7123509521970751421, guid: f7f785a0ac58a4e479aaf1a3155ef11c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7f785a0ac58a4e479aaf1a3155ef11c, type: 3}
 --- !u!1 &161748451 stripped
@@ -459,6 +483,9 @@ MonoBehaviour:
   healthBar: {fileID: 821564957}
   fallDamageRatio: 15
   fallHeight: -11
+  regenerationActivation: 0
+  regenerationFactor: 0.1
+  regenerationCooldown: 1
   player: {fileID: 1544655156}
 --- !u!114 &161748453
 MonoBehaviour:
@@ -1097,7 +1124,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 44de5993445992d4bb7bc0d12f84d123, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 44de5993445992d4bb7bc0d12f84d123, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2502,8 +2529,11 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 821564957}
-  fallDamageRatio: 15
-  fallHeight: -11
+  fallDamageRatio: 20
+  fallHeight: -11.2
+  regenerationActivation: 1
+  regenerationFactor: 0.1
+  regenerationCooldown: 1
   player: {fileID: 1544655156}
 --- !u!1 &1659508025
 GameObject:
