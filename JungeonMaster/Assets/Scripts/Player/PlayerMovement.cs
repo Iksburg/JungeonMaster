@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Player
@@ -10,7 +11,7 @@ namespace Player
         public float sprintSpeed;
         public float groundDrag;
         private Vector3 _moveDirection;
-    
+
         [Header("Crouching")]
         public float crouchSpeed;
         public float crouchYScale;
@@ -44,6 +45,10 @@ namespace Player
         [Header("State")]
         public MovementState state;
         
+        [Header("Player Movement")] 
+        [SerializeField] private GameObject player;
+        private PlayerStamina _playerStamina;
+        
         private float _horizontalInput;
         private float _verticalInput;
 
@@ -56,7 +61,12 @@ namespace Player
             Sprinting,
             Air
         }
-    
+
+        private void Awake()
+        {
+            _playerStamina = player.GetComponent<PlayerStamina>();
+        }
+
         private void Start()
         {
             _rb = GetComponent<Rigidbody>();
@@ -132,7 +142,7 @@ namespace Player
             else switch (grounded)
             {
                 // Sprinting
-                case true when Input.GetKey(sprintKey):
+                case true when (Input.GetKey(sprintKey) && !_playerStamina.zeroStamina):
                     state = MovementState.Sprinting;
                     _moveSpeed = sprintSpeed;
                     break;

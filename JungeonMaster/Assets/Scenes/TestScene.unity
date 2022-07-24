@@ -518,6 +518,7 @@ MonoBehaviour:
   maxSlopeAngle: 40
   orientation: {fileID: 1251937772}
   state: 0
+  player: {fileID: 0}
 --- !u!114 &161748454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2495,6 +2496,7 @@ MonoBehaviour:
   maxSlopeAngle: 40
   orientation: {fileID: 1251937772}
   state: 0
+  player: {fileID: 1544655156}
 --- !u!114 &1544655162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2563,12 +2565,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxStamina: 100
   currentStamina: 0
-  staminaDecrease: 0.03
-  decreasingCooldown: 0.05
+  staminaDecrease: 0.1
+  decreasingCooldown: 0.01
   staminaBar: {fileID: 354388257}
+  zeroStamina: 0
   regenerationActivation: 1
-  regenerationFactor: 0.1
-  regenerationCooldown: 0.1
+  regenerationFactor: 0.07
+  regenerationCooldown: 0.01
+  player: {fileID: 0}
 --- !u!1 &1659508025
 GameObject:
   m_ObjectHideFlags: 0

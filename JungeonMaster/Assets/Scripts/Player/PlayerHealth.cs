@@ -26,11 +26,6 @@ namespace Player
         
         private Rigidbody _rb;
 
-        private void Awake()
-        {
-            _playerMovement = player.GetComponent<PlayerMovement>();
-        }
-
         void Start()
         {
             // Setting the current health value
@@ -50,6 +45,11 @@ namespace Player
                 _damage = Mathf.Abs(_rb.velocity.y) / fallDamageRatio;
                 TakeDamage(_damage);
             }
+        }
+        
+        private void Awake()
+        {
+            _playerMovement = player.GetComponent<PlayerMovement>();
         }
 
         private void TakeDamage(float damage)
