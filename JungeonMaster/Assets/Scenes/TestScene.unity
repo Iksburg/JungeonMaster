@@ -483,7 +483,7 @@ MonoBehaviour:
   healthBar: {fileID: 821564957}
   fallDamageRatio: 15
   fallHeight: -11
-  regenerationActivation: 0
+  regenerationActivation: 1
   regenerationFactor: 0.1
   regenerationCooldown: 1
   player: {fileID: 1544655156}
@@ -731,6 +731,7 @@ GameObject:
   m_Component:
   - component: {fileID: 354388255}
   - component: {fileID: 354388256}
+  - component: {fileID: 354388257}
   m_Layer: 5
   m_Name: StaminaBar
   m_TagString: Untagged
@@ -812,6 +813,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &354388257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354388254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d9c0012222e8b4458d8e723eea2960d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 354388256}
 --- !u!1 &384297306
 GameObject:
   m_ObjectHideFlags: 0
@@ -2535,6 +2549,26 @@ MonoBehaviour:
   regenerationFactor: 0.1
   regenerationCooldown: 1
   player: {fileID: 1544655156}
+--- !u!114 &1544655165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544655156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba4b031c53ea01546b162ab7f4f9148c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxStamina: 100
+  currentStamina: 0
+  staminaDecrease: 0.03
+  decreasingCooldown: 0.05
+  staminaBar: {fileID: 354388257}
+  regenerationActivation: 1
+  regenerationFactor: 0.1
+  regenerationCooldown: 0.1
 --- !u!1 &1659508025
 GameObject:
   m_ObjectHideFlags: 0

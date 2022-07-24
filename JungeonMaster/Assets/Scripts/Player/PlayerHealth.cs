@@ -15,13 +15,13 @@ namespace Player
         public float fallDamageRatio = 15.0f;
         public float fallHeight = -11.0f;
 
-        [Header("Regeneration")] 
+        [Header("Health Regeneration")] 
         public bool regenerationActivation;
         public float regenerationFactor = 0.1f;
         public float regenerationCooldown = 1.0f;
         
-        [Header("PlayerMovement")]
-        public GameObject player;
+        [Header("Player Movement")]
+        [SerializeField] private GameObject player;
         private PlayerMovement _playerMovement;
         
         private Rigidbody _rb;
@@ -64,13 +64,13 @@ namespace Player
         {
             while (true)
             {
-                // Add hp, if regeneration on and current health is less than maximum health
+                // Add hp, if hp regeneration on and current health is less than maximum health
                 if (regenerationActivation && currentHealth < maxHealth)
                 {
                     if (currentHealth + regenerationFactor < maxHealth)
                         currentHealth += regenerationFactor;
                     else
-                        currentHealth += maxHealth - currentHealth;
+                        currentHealth = maxHealth;
                     
                     // Update health bar
                     healthBar.SetHealth(currentHealth);

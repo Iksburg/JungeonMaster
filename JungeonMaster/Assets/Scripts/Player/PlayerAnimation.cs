@@ -5,7 +5,7 @@ namespace Player
 {
     public class PlayerAnimation : MonoBehaviour
     {
-        [Header("PlayerCamera")]
+        [Header("Player Camera")]
         public GameObject player;
         private PlayerCamera _playerCamera;
         
