@@ -507,10 +507,10 @@ MonoBehaviour:
   jumpForce: 13
   jumpCooldown: 0.9
   airMultiplier: 0.4
+  readyToJump: 0
   jumpKey: 32
   sprintKey: 304
   crouchKey: 306
-  playerHeight: 1.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -1906,7 +1906,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1146529193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.494, z: 0.066}
+  m_LocalPosition: {x: 0.0112, y: 1.4978, z: 0.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2482,13 +2482,13 @@ MonoBehaviour:
   groundDrag: 5
   crouchSpeed: 2.3
   crouchYScale: 0.5
-  jumpForce: 13
+  jumpForce: 9
   jumpCooldown: 0.9
   airMultiplier: 0.4
+  readyToJump: 0
   jumpKey: 32
   sprintKey: 304
   crouchKey: 306
-  playerHeight: 1.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -2565,14 +2565,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxStamina: 100
   currentStamina: 0
-  staminaDecrease: 0.1
+  sprintingStaminaDecrease: 0.1
+  jumpingStaminaDecrease: 15
   decreasingCooldown: 0.01
   staminaBar: {fileID: 354388257}
   zeroStamina: 0
+  readyToJump: 1
   regenerationActivation: 1
-  regenerationFactor: 0.07
+  regenerationFactor: 0.06
   regenerationCooldown: 0.01
-  player: {fileID: 0}
+  player: {fileID: 1544655156}
 --- !u!1 &1659508025
 GameObject:
   m_ObjectHideFlags: 0

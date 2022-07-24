@@ -8,20 +8,32 @@ namespace Player
         [Header("Stamina")]
         public float maxStamina = 100.0f;
         public float currentStamina;
-        public float staminaDecrease = 1.0f;
-        public float decreasingCooldown = 0.05f;
+        public float sprintingStaminaDecrease = 0.1f;
+        public float jumpingStaminaDecrease = 15.0f;
+        public float decreasingCooldown = 0.01f;
         public StaminaBar staminaBar;
         private KeyCode _sprintKey;
+        private KeyCode _jumpKey;
         public bool zeroStamina;
+        public bool readyToJump = true;
 
         [Header("Stamina Regeneration")] 
         public bool regenerationActivation;
-        public float regenerationFactor = 0.1f;
-        public float regenerationCooldown = 0.1f;
+        public float regenerationFactor = 0.06f;
+        public float regenerationCooldown = 0.01f;
 
         [Header("Player Movement")] 
         [SerializeField] private GameObject player;
         private PlayerMovement _playerMovement;
+
+        [Header("Input")] 
+        private float _horizontalInput;
+        private float _verticalInput;
+
+        private void Awake()
+        {
+            _playerMovement = player.GetComponent<PlayerMovement>();
+        }
         
         void Start()
         {
@@ -35,33 +47,49 @@ namespace Player
     
         void Update()
         {
+            ReadyToJump();
+            
             _sprintKey = _playerMovement.sprintKey;
+            _jumpKey = _playerMovement.jumpKey;
+
+            _horizontalInput = Input.GetAxisRaw("Horizontal");
+            _verticalInput = Input.GetAxisRaw("Vertical");
         }
-        
-        private void Awake()
+
+        private void ReadyToJump()
         {
-            _playerMovement = player.GetComponent<PlayerMovement>();
+            readyToJump = !(currentStamina < jumpingStaminaDecrease);
         }
 
         private IEnumerator StaminaDecreasing()
         {
             while (true)
             {
-                if (Input.GetKey(_sprintKey) && currentStamina > 0)
+                if (currentStamina >= jumpingStaminaDecrease)
+                    readyToJump = true;
+                
+                if (Input.GetKey(_sprintKey) && currentStamina > 0 && (_horizontalInput != 0 || _verticalInput != 0))
                 {
-                    if (currentStamina - staminaDecrease > 0)
+                    if (currentStamina - sprintingStaminaDecrease > 0)
                     {
-                        currentStamina -= staminaDecrease;
+                        currentStamina -= sprintingStaminaDecrease;
                     }
                     else
                     {
                         currentStamina = 0;
                         zeroStamina = true;
                     }
-
-                    staminaBar.SetStamina(currentStamina);
                 }
                 
+                if (Input.GetKey(_jumpKey) && _playerMovement.grounded && currentStamina > 0)
+                {
+                    if (currentStamina - jumpingStaminaDecrease > 0)
+                    {
+                        currentStamina -= jumpingStaminaDecrease;
+                    }
+                }
+                
+                staminaBar.SetStamina(currentStamina);
                 yield return new WaitForSeconds(decreasingCooldown);
             }
         }
@@ -71,7 +99,7 @@ namespace Player
             while (true)
             {
                 // Add stamina, if stamina regeneration on and current stamina is less than maximum stamina
-                if (regenerationActivation && currentStamina < maxStamina && !Input.GetKey(_sprintKey))
+                if (regenerationActivation && currentStamina < maxStamina && (!Input.GetKey(_sprintKey) || _horizontalInput == 0 && _verticalInput == 0))
                 {
                     if (currentStamina + regenerationFactor < maxStamina)
                     {

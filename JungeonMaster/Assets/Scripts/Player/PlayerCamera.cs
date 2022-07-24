@@ -29,7 +29,7 @@ namespace Player
             _yRotation += mouseX;
 
             _xRotation -= mouseY;
-            _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
+            _xRotation = Mathf.Clamp(_xRotation, -80f, 70f);
         
             // Rotate cam and orientation
             transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);

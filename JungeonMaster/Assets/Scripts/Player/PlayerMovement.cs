@@ -21,15 +21,14 @@ namespace Player
         public float jumpForce;
         public float jumpCooldown;
         public float airMultiplier;
-        private bool _readyToJump;
+        public bool readyToJump;
 
         [Header("KeyBinds")] 
         public KeyCode jumpKey = KeyCode.Space;
         public KeyCode sprintKey = KeyCode.LeftShift;
         public KeyCode crouchKey = KeyCode.LeftControl;
     
-        [Header("Ground Check")] 
-        public float playerHeight;
+        [Header("Ground Check")]
         public LayerMask whatIsGround;
         private Vector3 _correctedVector;
         public bool grounded;
@@ -49,6 +48,7 @@ namespace Player
         [SerializeField] private GameObject player;
         private PlayerStamina _playerStamina;
         
+        [Header("Key Input")]
         private float _horizontalInput;
         private float _verticalInput;
 
@@ -72,7 +72,7 @@ namespace Player
             _rb = GetComponent<Rigidbody>();
             _rb.freezeRotation = true;
 
-            _readyToJump = true;
+            readyToJump = true;
 
             _startYScale = transform.localScale.y;
         }
@@ -81,8 +81,8 @@ namespace Player
         {
             //ground check
             _correctedVector = transform.position + new Vector3(0, 0.01f, 0);
-            grounded = Physics.Raycast(_correctedVector, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-        
+            grounded = Physics.Raycast(_correctedVector, Vector3.down, 0.05f, whatIsGround);
+
             MyInput();
             SpeedControl();
             StateHandler();
@@ -108,9 +108,9 @@ namespace Player
             _verticalInput = Input.GetAxisRaw("Vertical");
         
             // when jump
-            if (Input.GetKey(jumpKey) && _readyToJump && grounded)
+            if (Input.GetKey(jumpKey) && readyToJump && grounded && _playerStamina.readyToJump)
             {
-                _readyToJump = false;
+                readyToJump = false;
             
                 Jump();
             
@@ -142,7 +142,7 @@ namespace Player
             else switch (grounded)
             {
                 // Sprinting
-                case true when (Input.GetKey(sprintKey) && !_playerStamina.zeroStamina):
+                case true when Input.GetKey(sprintKey) && !_playerStamina.zeroStamina:
                     state = MovementState.Sprinting;
                     _moveSpeed = sprintSpeed;
                     break;
@@ -224,13 +224,13 @@ namespace Player
 
         private void ResetJump()
         {
-            _readyToJump = true;
+            readyToJump = true;
             _exitingSlope = false;
         }
 
         private bool OnSlope()
         {
-            if (Physics.Raycast(transform.position, Vector3.down, out _slopeHit, playerHeight * 0.5f + 0.3f))
+            if (Physics.Raycast(transform.position, Vector3.down, out _slopeHit, 0.1f))
             {
                 float angle = Vector3.Angle(Vector3.up, _slopeHit.normal);
                 return angle < maxSlopeAngle && angle != 0;
