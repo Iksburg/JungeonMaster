@@ -12,15 +12,23 @@ namespace Player
         public float jumpingStaminaDecrease = 15.0f;
         public float decreasingCooldown = 0.01f;
         public StaminaBar staminaBar;
-        private KeyCode _sprintKey;
-        private KeyCode _jumpKey;
-        public bool zeroStamina;
-        public bool readyToJump = true;
-
+        
         [Header("Stamina Regeneration")] 
         public bool regenerationActivation;
         public float regenerationFactor = 0.06f;
         public float regenerationCooldown = 0.01f;
+        
+        [Header("KeyBinds")]
+        private KeyCode _sprintKey;
+        private KeyCode _jumpKey;
+        
+        [Header("Restrictions")]
+        public bool zeroStamina;
+        public bool enoughStaminaToJump = true;
+        
+        [Header("Jump")]
+        private float _jumpCooldown;
+        private bool _readyToJump = true;
 
         [Header("Player Movement")] 
         [SerializeField] private GameObject player;
@@ -29,7 +37,8 @@ namespace Player
         [Header("Input")] 
         private float _horizontalInput;
         private float _verticalInput;
-
+        
+        // Getting component from another script
         private void Awake()
         {
             _playerMovement = player.GetComponent<PlayerMovement>();
@@ -41,33 +50,36 @@ namespace Player
             currentStamina = maxStamina;
             staminaBar.SetMaxStamina(maxStamina);
             
+            // Starting coroutines for decrease and regeneration stamina
             StartCoroutine(StaminaDecreasing());
             StartCoroutine(StaminaRegeneration());
         }
     
         void Update()
         {
+            // Function, that checking that player have enough stamina to jump
             ReadyToJump();
             
+            // Set and update variables from another script
             _sprintKey = _playerMovement.sprintKey;
             _jumpKey = _playerMovement.jumpKey;
-
+            _jumpCooldown = _playerMovement.jumpCooldown;
+            
+            // Variables to check player movement
             _horizontalInput = Input.GetAxisRaw("Horizontal");
             _verticalInput = Input.GetAxisRaw("Vertical");
         }
 
         private void ReadyToJump()
         {
-            readyToJump = !(currentStamina < jumpingStaminaDecrease);
+            enoughStaminaToJump = !(currentStamina < jumpingStaminaDecrease);
         }
 
         private IEnumerator StaminaDecreasing()
         {
             while (true)
             {
-                if (currentStamina >= jumpingStaminaDecrease)
-                    readyToJump = true;
-                
+                // Reduce stamina while sprinting. If it is not enough, turn off sprinting
                 if (Input.GetKey(_sprintKey) && currentStamina > 0 && (_horizontalInput != 0 || _verticalInput != 0))
                 {
                     if (currentStamina - sprintingStaminaDecrease > 0)
@@ -81,15 +93,22 @@ namespace Player
                     }
                 }
                 
-                if (Input.GetKey(_jumpKey) && _playerMovement.grounded && currentStamina > 0)
+                // Reduce stamina while jumping. If it is not enough, disable the ability to jump
+                if (_readyToJump && Input.GetKey(_jumpKey) && _playerMovement.grounded && currentStamina > 0)
                 {
+                    _readyToJump = false;
+                    
                     if (currentStamina - jumpingStaminaDecrease > 0)
                     {
                         currentStamina -= jumpingStaminaDecrease;
                     }
+                    
+                    Invoke(nameof(ResetJump), _jumpCooldown);
                 }
                 
                 staminaBar.SetStamina(currentStamina);
+                
+                // Cooldown
                 yield return new WaitForSeconds(decreasingCooldown);
             }
         }
@@ -118,6 +137,11 @@ namespace Player
                 // Cooldown
                 yield return new WaitForSeconds(regenerationCooldown);
             }
+        }
+
+        private void ResetJump()
+        {
+            _readyToJump = true;
         }
     }
 }

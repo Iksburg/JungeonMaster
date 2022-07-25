@@ -19,7 +19,8 @@ namespace Player
         private Rigidbody _rb;
         private Animator _animator;
         private static readonly int Speed = Animator.StringToHash("Speed");
-
+        
+        // Getting component from another script
         private void Awake()
         {
             _playerCamera = player.GetComponent<PlayerCamera>();
@@ -28,6 +29,7 @@ namespace Player
         void Start()
         {
             _sensX = _playerCamera.sensX;
+            
             _rb = GetComponent<Rigidbody>();
             _animator = GetComponent<Animator>();
         }
@@ -38,8 +40,9 @@ namespace Player
             _yRotation += mouseX;
 
             transform.rotation = Quaternion.Euler(0, _yRotation, 0);
-            
-            _speed = _rb.velocity.magnitude;
+
+            var velocity = _rb.velocity;
+            _speed = Mathf.Sqrt(velocity.z * velocity.z + velocity.x * velocity.x);
             _animator.SetFloat(Speed, _speed);
         }
     }

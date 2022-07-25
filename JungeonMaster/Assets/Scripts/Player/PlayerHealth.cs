@@ -25,13 +25,20 @@ namespace Player
         private PlayerMovement _playerMovement;
         
         private Rigidbody _rb;
+        
+        // Getting component from another script
+        private void Awake()
+        {
+            _playerMovement = player.GetComponent<PlayerMovement>();
+        }
 
         void Start()
         {
             // Setting the current health value
             currentHealth = maxHealth;
             healthBar.SetMaxHealth(maxHealth);
-
+            
+            // Starting coroutines for regeneration hp
             StartCoroutine(Regeneration());
             
             _rb = GetComponent<Rigidbody>();
@@ -40,24 +47,16 @@ namespace Player
         void Update()
         {
             // Taking fall damage
-            if (_rb.velocity.y < fallHeight && _playerMovement.grounded)
-            {
-                _damage = Mathf.Abs(_rb.velocity.y) / fallDamageRatio;
-                TakeDamage(_damage);
-            }
-        }
-        
-        private void Awake()
-        {
-            _playerMovement = player.GetComponent<PlayerMovement>();
+            FallDamage();
         }
 
-        private void TakeDamage(float damage)
+        private void FallDamage()
         {
-            currentHealth -= damage;
-            
-            // Update health bar
-            healthBar.SetHealth(currentHealth);
+            if (_rb.velocity.y < fallHeight && _playerMovement.grounded)
+            {
+                currentHealth -= Mathf.Abs(_rb.velocity.y) / fallDamageRatio;
+                healthBar.SetHealth(currentHealth);
+            }
         }
 
         private IEnumerator Regeneration()

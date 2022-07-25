@@ -1143,7 +1143,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 44de5993445992d4bb7bc0d12f84d123, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 3.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 44de5993445992d4bb7bc0d12f84d123, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2545,7 +2545,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 821564957}
-  fallDamageRatio: 20
+  fallDamageRatio: 15
   fallHeight: -11.2
   regenerationActivation: 1
   regenerationFactor: 0.1
@@ -2569,11 +2569,11 @@ MonoBehaviour:
   jumpingStaminaDecrease: 15
   decreasingCooldown: 0.01
   staminaBar: {fileID: 354388257}
-  zeroStamina: 0
-  readyToJump: 1
   regenerationActivation: 1
   regenerationFactor: 0.06
   regenerationCooldown: 0.01
+  zeroStamina: 0
+  enoughStaminaToJump: 1
   player: {fileID: 1544655156}
 --- !u!1 &1659508025
 GameObject:
@@ -2804,7 +2804,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fc91d7301e8eac247919e2360d88f8dd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.4188566
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fc91d7301e8eac247919e2360d88f8dd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2812,7 +2812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fc91d7301e8eac247919e2360d88f8dd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.854244
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fc91d7301e8eac247919e2360d88f8dd, type: 3}
       propertyPath: m_LocalRotation.w

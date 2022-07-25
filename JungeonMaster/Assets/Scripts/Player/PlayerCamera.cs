@@ -10,12 +10,12 @@ namespace Player
         
         [Header("Orientation")]
         public Transform orientation;
-
         private float _xRotation;
         private float _yRotation;
+        
         void Start()
         {
-            //
+            // Remove the visibility of the cursor and fix it in the center of the screen
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }

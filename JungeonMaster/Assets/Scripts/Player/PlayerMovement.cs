@@ -61,7 +61,8 @@ namespace Player
             Sprinting,
             Air
         }
-
+        
+        // Getting component from another script
         private void Awake()
         {
             _playerStamina = player.GetComponent<PlayerStamina>();
@@ -81,7 +82,7 @@ namespace Player
         {
             //ground check
             _correctedVector = transform.position + new Vector3(0, 0.01f, 0);
-            grounded = Physics.Raycast(_correctedVector, Vector3.down, 0.05f, whatIsGround);
+            grounded = Physics.Raycast(_correctedVector, Vector3.down, 0.15f, whatIsGround);
 
             MyInput();
             SpeedControl();
@@ -108,7 +109,7 @@ namespace Player
             _verticalInput = Input.GetAxisRaw("Vertical");
         
             // when jump
-            if (Input.GetKey(jumpKey) && readyToJump && grounded && _playerStamina.readyToJump)
+            if (Input.GetKey(jumpKey) && readyToJump && grounded && _playerStamina.enoughStaminaToJump)
             {
                 readyToJump = false;
             
@@ -230,7 +231,7 @@ namespace Player
 
         private bool OnSlope()
         {
-            if (Physics.Raycast(transform.position, Vector3.down, out _slopeHit, 0.1f))
+            if (Physics.Raycast(transform.position, Vector3.down, out _slopeHit, 0.2f))
             {
                 float angle = Vector3.Angle(Vector3.up, _slopeHit.normal);
                 return angle < maxSlopeAngle && angle != 0;
