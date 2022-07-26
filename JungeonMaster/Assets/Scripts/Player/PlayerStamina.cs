@@ -6,17 +6,17 @@ namespace Player
     public class PlayerStamina : MonoBehaviour
     {
         [Header("Stamina")]
-        public float maxStamina = 100.0f;
+        public float maxStamina;
         public float currentStamina;
-        public float sprintingStaminaDecrease = 0.1f;
-        public float jumpingStaminaDecrease = 15.0f;
-        public float decreasingCooldown = 0.01f;
+        public float sprintingStaminaDecrease;
+        public float jumpingStaminaDecrease;
+        public float decreasingCooldown;
         public StaminaBar staminaBar;
         
         [Header("Stamina Regeneration")] 
         public bool regenerationActivation;
-        public float regenerationFactor = 0.06f;
-        public float regenerationCooldown = 0.01f;
+        public float regenerationFactor;
+        public float regenerationCooldown;
         
         [Header("KeyBinds")]
         private KeyCode _sprintKey;
@@ -118,7 +118,8 @@ namespace Player
             while (true)
             {
                 // Add stamina, if stamina regeneration on and current stamina is less than maximum stamina
-                if (regenerationActivation && currentStamina < maxStamina && (!Input.GetKey(_sprintKey) || _horizontalInput == 0 && _verticalInput == 0))
+                if (regenerationActivation && currentStamina < maxStamina &&
+                    (!Input.GetKey(_sprintKey) || _horizontalInput == 0 && _verticalInput == 0))
                 {
                     if (currentStamina + regenerationFactor < maxStamina)
                     {

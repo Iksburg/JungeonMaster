@@ -6,19 +6,19 @@ namespace Player
     public class PlayerHealth : MonoBehaviour
     {
         [Header("Health")]
-        public float maxHealth = 100.0f;
+        public float maxHealth;
         public float currentHealth;
         private float _damage;
         public HealthBar healthBar;
         
         [Header("Fall")]
-        public float fallDamageRatio = 15.0f;
-        public float fallHeight = -11.0f;
+        public float fallDamageRatio;
+        public float fallHeight;
 
         [Header("Health Regeneration")] 
         public bool regenerationActivation;
-        public float regenerationFactor = 0.1f;
-        public float regenerationCooldown = 1.0f;
+        public float regenerationFactor;
+        public float regenerationCooldown;
         
         [Header("Player Movement")]
         [SerializeField] private GameObject player;

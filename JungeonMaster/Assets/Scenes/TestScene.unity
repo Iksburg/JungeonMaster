@@ -531,7 +531,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8ace4106c8872408edceaf3a58790b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1715587844}
+  playerCamera: {fileID: 0}
+  player: {fileID: 0}
 --- !u!54 &161748455
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2509,7 +2510,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8ace4106c8872408edceaf3a58790b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1715587844}
+  playerCamera: {fileID: 1715587844}
+  player: {fileID: 1544655156}
 --- !u!95 &1544655163
 Animator:
   serializedVersion: 4
