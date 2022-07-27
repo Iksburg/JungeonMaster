@@ -1,0 +1,131 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Legs
+  m_Mask: 01000000010000000000000001000000010000000000000000000000000000000000000001000000010000000000000000000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: male
+    m_Weight: 1
+  - m_Path: maleArmature
+    m_Weight: 1
+  - m_Path: maleArmature/footIK.L
+    m_Weight: 1
+  - m_Path: maleArmature/footIK.L/foot.L
+    m_Weight: 1
+  - m_Path: maleArmature/footIK.L/foot.L/toes.L
+    m_Weight: 1
+  - m_Path: maleArmature/footIK.L/foot.L/toes.L/toes.L_end
+    m_Weight: 1
+  - m_Path: maleArmature/footIK.R
+    m_Weight: 1
+  - m_Path: maleArmature/footIK.R/foot.R
+    m_Weight: 1
+  - m_Path: maleArmature/footIK.R/foot.R/toes.R
+    m_Weight: 1
+  - m_Path: maleArmature/footIK.R/foot.R/toes.R/toes.R_end
+    m_Weight: 1
+  - m_Path: maleArmature/handIK.L
+    m_Weight: 1
+  - m_Path: maleArmature/handIK.L/hand.01.L
+    m_Weight: 1
+  - m_Path: maleArmature/handIK.L/hand.01.L/hand.01.L.001
+    m_Weight: 1
+  - m_Path: maleArmature/handIK.L/hand.01.L/hand.01.L.001/hand.02.L
+    m_Weight: 1
+  - m_Path: maleArmature/handIK.L/hand.01.L/hand.01.L.001/hand.02.L/hand.03.L
+    m_Weight: 1
+  - m_Path: maleArmature/handIK.L/hand.01.L/hand.01.L.001/hand.02.L/hand.03.L/hand.03.L_end
+    m_Weight: 1
+  - m_Path: maleArmature/handIK.L/hand.01.L/item.L
+    m_Weight: 1
+  - m_Path: maleArmature/handIK.L/hand.01.L/item.L/item.L_end
+    m_Weight: 1
+  - m_Path: maleArmature/handIK.L/hand.01.L/thumb.01.L
+    m_Weight: 1
+  - m_Path: maleArmature/handIK.L/hand.01.L/thumb.01.L/thumb.02.L
+    m_Weight: 1
+  - m_Path: maleArmature/handIK.L/hand.01.L/thumb.01.L/thumb.02.L/thumb.02.L_end
+    m_Weight: 1
+  - m_Path: maleArmature/handIK.R
+    m_Weight: 0
+  - m_Path: maleArmature/handIK.R/hand.01.R
+    m_Weight: 0
+  - m_Path: maleArmature/handIK.R/hand.01.R/hand.01.R.001
+    m_Weight: 0
+  - m_Path: maleArmature/handIK.R/hand.01.R/hand.01.R.001/hand.02.R
+    m_Weight: 0
+  - m_Path: maleArmature/handIK.R/hand.01.R/hand.01.R.001/hand.02.R/hand.03.R
+    m_Weight: 0
+  - m_Path: maleArmature/handIK.R/hand.01.R/hand.01.R.001/hand.02.R/hand.03.R/hand.03.R_end
+    m_Weight: 0
+  - m_Path: maleArmature/handIK.R/hand.01.R/item.R
+    m_Weight: 0
+  - m_Path: maleArmature/handIK.R/hand.01.R/item.R/item.R_end
+    m_Weight: 0
+  - m_Path: maleArmature/handIK.R/hand.01.R/thumb.01.R
+    m_Weight: 0
+  - m_Path: maleArmature/handIK.R/hand.01.R/thumb.01.R/thumb.02.R
+    m_Weight: 0
+  - m_Path: maleArmature/handIK.R/hand.01.R/thumb.01.R/thumb.02.R/thumb.02.R_end
+    m_Weight: 0
+  - m_Path: maleArmature/poleArm.L
+    m_Weight: 1
+  - m_Path: maleArmature/poleArm.L/poleArm.L_end
+    m_Weight: 1
+  - m_Path: maleArmature/poleArm.R
+    m_Weight: 1
+  - m_Path: maleArmature/poleArm.R/poleArm.R_end
+    m_Weight: 1
+  - m_Path: maleArmature/poleLegIK.L
+    m_Weight: 1
+  - m_Path: maleArmature/poleLegIK.L/poleLegIK.L_end
+    m_Weight: 1
+  - m_Path: maleArmature/poleLegIK.R
+    m_Weight: 1
+  - m_Path: maleArmature/poleLegIK.R/poleLegIK.R_end
+    m_Weight: 1
+  - m_Path: maleArmature/spine
+    m_Weight: 0
+  - m_Path: maleArmature/spine/chest
+    m_Weight: 0
+  - m_Path: maleArmature/spine/chest/neck
+    m_Weight: 1
+  - m_Path: maleArmature/spine/chest/neck/head
+    m_Weight: 1
+  - m_Path: maleArmature/spine/chest/neck/head/head_end
+    m_Weight: 1
+  - m_Path: maleArmature/spine/chest/shoulder.L
+    m_Weight: 1
+  - m_Path: maleArmature/spine/chest/shoulder.L/upperarm.L
+    m_Weight: 1
+  - m_Path: maleArmature/spine/chest/shoulder.L/upperarm.L/lowerarm.L
+    m_Weight: 1
+  - m_Path: maleArmature/spine/chest/shoulder.L/upperarm.L/lowerarm.L/lowerarm.L_end
+    m_Weight: 1
+  - m_Path: maleArmature/spine/chest/shoulder.R
+    m_Weight: 0
+  - m_Path: maleArmature/spine/chest/shoulder.R/upperarm.R
+    m_Weight: 0
+  - m_Path: maleArmature/spine/chest/shoulder.R/upperarm.R/lowerarm.R
+    m_Weight: 0
+  - m_Path: maleArmature/spine/chest/shoulder.R/upperarm.R/lowerarm.R/lowerarm.R_end
+    m_Weight: 0
+  - m_Path: maleArmature/spine/upperleg.L
+    m_Weight: 1
+  - m_Path: maleArmature/spine/upperleg.L/lowerleg.L
+    m_Weight: 1
+  - m_Path: maleArmature/spine/upperleg.L/lowerleg.L/lowerleg.L_end
+    m_Weight: 1
+  - m_Path: maleArmature/spine/upperleg.R
+    m_Weight: 1
+  - m_Path: maleArmature/spine/upperleg.R/lowerleg.R
+    m_Weight: 1
+  - m_Path: maleArmature/spine/upperleg.R/lowerleg.R/lowerleg.R_end
+    m_Weight: 1
