@@ -56,6 +56,8 @@ namespace Player
             var velocity = _rb.velocity;
             _playerSpeed = Mathf.Sqrt(velocity.z * velocity.z + velocity.x * velocity.x);
             
+            print(_playerSpeed);
+
             // Converting coordinates
             if (_playerSpeed == 0)
             {
@@ -71,7 +73,7 @@ namespace Player
                     (_playerSpeed - _walkSpeed) * (SprintThreshold - WalkThreshold) / (_sprintSpeed - _walkSpeed) +
                     WalkThreshold;
             }
-            
+
             _animator.SetFloat(Speed, _animatorSpeed);
         }
     }
