@@ -2143,7 +2143,7 @@ MonoBehaviour:
   groundDrag: 5
   crouchSpeed: 2.3
   crouchYScale: 0.5
-  jumpForce: 9
+  jumpForce: 670
   jumpCooldown: 0.9
   airMultiplier: 0.4
   readyToJump: 0
@@ -2156,7 +2156,7 @@ MonoBehaviour:
   grounded: 0
   maxSlopeAngle: 40
   orientation: {fileID: 768257774}
-  state: 1
+  state: 0
   player: {fileID: 1470633227}
 --- !u!54 &1470633234
 Rigidbody:
