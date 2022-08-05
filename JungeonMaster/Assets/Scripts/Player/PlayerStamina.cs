@@ -134,7 +134,7 @@ namespace Player
                     // Update stamina bar
                     staminaBar.SetStamina(currentStamina);
                 }
-                
+
                 // Cooldown
                 yield return new WaitForSeconds(regenerationCooldown);
             }

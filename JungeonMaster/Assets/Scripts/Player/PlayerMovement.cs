@@ -84,7 +84,6 @@ namespace Player
             grounded = Physics.Raycast(_correctedVector, Vector3.down, 0.15f, whatIsGround);
 
             MyInput();
-            SpeedControl();
             StateHandler();
         
             //handle drag
@@ -99,6 +98,7 @@ namespace Player
         private void FixedUpdate()
         {
             MovePlayer();
+            SpeedControl();
         }
     
         // ReSharper disable Unity.PerformanceAnalysis

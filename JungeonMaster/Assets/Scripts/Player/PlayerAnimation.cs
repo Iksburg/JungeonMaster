@@ -55,8 +55,6 @@ namespace Player
 
             var velocity = _rb.velocity;
             _playerSpeed = Mathf.Sqrt(velocity.z * velocity.z + velocity.x * velocity.x);
-            
-            print(_playerSpeed);
 
             // Converting coordinates
             if (_playerSpeed == 0)
