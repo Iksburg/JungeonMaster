@@ -71,6 +71,8 @@ namespace Player
                     (_playerSpeed - _walkSpeed) * (SprintThreshold - WalkThreshold) / (_sprintSpeed - _walkSpeed) +
                     WalkThreshold;
             }
+            
+            print(_animatorSpeed);
 
             _animator.SetFloat(Speed, _animatorSpeed);
         }
